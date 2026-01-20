@@ -942,18 +942,22 @@ const AP_Param::Info Plane::var_info[] = {
 #if PARACHUTE == ENABLED
 	// @Group: CHUTE_
     // @Path: ../libraries/AP_Parachute/AP_Parachute.cpp
-    GOBJECT(parachute,		"CHUTE_", AP_Parachute),
+
+        //custom closed
+    ////custom closed. GOBJECT(parachute,		"CHUTE_", AP_Parachute),
 
     // @Param: CHUTE_CHAN
     // @DisplayName: Parachute release channel
     // @Description: If set to a non-zero value then this is an RC input channel number to use for manually releasing the parachute. When this channel goes above 1700 the parachute will be released
     // @User: Advanced
-    GSCALAR(parachute_channel,      "CHUTE_CHAN",  0),
+    //GSCALAR(parachute_channel,      "CHUTE_CHAN",  0),
 #endif
 
     // @Group: RNGFND
     // @Path: ../libraries/AP_RangeFinder/RangeFinder.cpp
-    GOBJECT(rangefinder,            "RNGFND", RangeFinder),
+
+////custom closed.
+    ////custom closed.GOBJECT(rangefinder,            "RNGFND", RangeFinder),
 
     // @Param: RNGFND_LANDING
     // @DisplayName: Enable rangefinder for landing
@@ -970,11 +974,15 @@ const AP_Param::Info Plane::var_info[] = {
 
     // @Group: ADSB_
     // @Path: ../libraries/AP_ADSB/AP_ADSB.cpp
-    GOBJECT(adsb,                "ADSB_", AP_ADSB),
+
+        ////custom closed.
+    ////custom closed.GOBJECT(adsb,                "ADSB_", AP_ADSB),
 
     // @Group: AVD_
     // @Path: ../libraries/AP_Avoidance/AP_Avoidance.cpp
-    GOBJECT(avoidance_adsb, "AVD_", AP_Avoidance_Plane),
+
+
+    ////custom closed.GOBJECT(avoidance_adsb, "AVD_", AP_Avoidance_Plane),
 
     // @Group: Q_
     // @Path: quadplane.cpp
@@ -1059,7 +1067,7 @@ const AP_Param::Info Plane::var_info[] = {
 #if MOUNT == ENABLED
     // @Group: MNT
     // @Path: ../libraries/AP_Mount/AP_Mount.cpp
-    GOBJECT(camera_mount,           "MNT",  AP_Mount),
+    ////custom closed.GOBJECT(camera_mount,           "MNT",  AP_Mount),
 #endif
 
     // @Group: LOG
@@ -1093,7 +1101,7 @@ const AP_Param::Info Plane::var_info[] = {
 #if OPTFLOW == ENABLED
     // @Group: FLOW
     // @Path: ../libraries/AP_OpticalFlow/OpticalFlow.cpp
-    GOBJECT(optflow,   "FLOW", OpticalFlow),
+    ////custom closed.GOBJECT(optflow,   "FLOW", OpticalFlow),
 #endif
 
     // @Group: MIS_
@@ -1107,11 +1115,11 @@ const AP_Param::Info Plane::var_info[] = {
 #if AP_AHRS_NAVEKF_AVAILABLE
     // @Group: EK2_
     // @Path: ../libraries/AP_NavEKF2/AP_NavEKF2.cpp
-    GOBJECTN(EKF2, NavEKF2, "EK2_", NavEKF2),
+   ////custom closed. GOBJECTN(EKF2, NavEKF2, "EK2_", NavEKF2),
 
     // @Group: EK3_
     // @Path: ../libraries/AP_NavEKF3/AP_NavEKF3.cpp
-    GOBJECTN(EKF3, NavEKF3, "EK3_", NavEKF3),
+    ////custom closed.GOBJECTN(EKF3, NavEKF3, "EK3_", NavEKF3),
 #endif
 
     // @Group: RPM
@@ -1144,11 +1152,15 @@ const AP_Param::GroupInfo ParametersG2::var_info[] = {
 
     // @Group: BTN_
     // @Path: ../libraries/AP_Button/AP_Button.cpp
-    AP_SUBGROUPINFO(button, "BTN_", 1, ParametersG2, AP_Button),
+
+    ////custom closed.
+   ////custom closed. AP_SUBGROUPINFO(button, "BTN_", 1, ParametersG2, AP_Button),
 
     // @Group: ICE_
     // @Path: ../libraries/AP_ICEngine/AP_ICEngine.cpp
-    AP_SUBGROUPINFO(ice_control, "ICE_", 2, ParametersG2, AP_ICEngine),
+    // 
+    // ////custom closed.
+   ////custom closed. AP_SUBGROUPINFO(ice_control, "ICE_", 2, ParametersG2, AP_ICEngine),
 
     // 3 was used by prototype for servo_channels
     
@@ -1161,7 +1173,8 @@ const AP_Param::GroupInfo ParametersG2::var_info[] = {
 
     // @Group: STAT
     // @Path: ../libraries/AP_Stats/AP_Stats.cpp
-    AP_SUBGROUPINFO(stats, "STAT", 5, ParametersG2, AP_Stats),
+    ////custom closed.
+   ////custom closed. AP_SUBGROUPINFO(stats, "STAT", 5, ParametersG2, AP_Stats),
 
     // @Group: SERVO
     // @Path: ../libraries/SRV_Channel/SRV_Channels.cpp
@@ -1173,7 +1186,9 @@ const AP_Param::GroupInfo ParametersG2::var_info[] = {
     
     // @Group: SOAR_
     // @Path: ../libraries/AP_Soaring/AP_Soaring.cpp
-    AP_SUBGROUPINFO(soaring_controller, "SOAR_", 8, ParametersG2, SoaringController),
+
+    ////custom closed.
+   ////custom closed. AP_SUBGROUPINFO(soaring_controller, "SOAR_", 8, ParametersG2, SoaringController),
   
     // @Param: RUDD_DT_GAIN
     // @DisplayName: rudder differential thrust gain
@@ -1182,14 +1197,18 @@ const AP_Param::GroupInfo ParametersG2::var_info[] = {
     // @Units: %
     // @Increment: 1
     // @User: Standard
-    AP_GROUPINFO("RUDD_DT_GAIN", 9, ParametersG2, rudd_dt_gain, 10),
+
+    ////custom closed.
+    ////custom closed.AP_GROUPINFO("RUDD_DT_GAIN", 9, ParametersG2, rudd_dt_gain, 10),
 
     // @Param: MANUAL_RCMASK
     // @DisplayName: Manual R/C pass-through mask
     // @Description: Mask of R/C channels to pass directly to corresponding output channel when in MANUAL mode. When in any mode except MANUAL the channels selected with this option behave normally. This parameter is designed to allow for complex mixing strategies to be used for MANUAL flight using transmitter based mixing. Note that when this option is used you need to be very careful with pre-flight checks to ensure that the output is correct both in MANUAL and non-MANUAL modes.
     // @Bitmask: 0:Chan1,1:Chan2,2:Chan3,3:Chan4,4:Chan5,5:Chan6,6:Chan7,7:Chan8,8:Chan9,9:Chan10,10:Chan11,11:Chan12,12:Chan13,13:Chan14,14:Chan15,15:Chan16
     // @User: Advanced
-    AP_GROUPINFO("MANUAL_RCMASK", 10, ParametersG2, manual_rc_mask, 0),
+
+    ////custom closed.
+    ////custom closed.AP_GROUPINFO("MANUAL_RCMASK", 10, ParametersG2, manual_rc_mask, 0),
     
     AP_GROUPEND
 };

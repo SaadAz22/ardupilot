@@ -703,95 +703,113 @@ bool GCS_MAVLINK_Plane::try_send_message(enum ap_message id)
   default stream rates to 1Hz
  */
 const AP_Param::GroupInfo GCS_MAVLINK::var_info[] = {
-    // @Param: RAW_SENS
-    // @DisplayName: Raw sensor stream rate
-    // @Description: Raw sensor stream rate to ground station
-    // @Units: Hz
-    // @Range: 0 10
-    // @Increment: 1
-    // @User: Advanced
-    AP_GROUPINFO("RAW_SENS", 0, GCS_MAVLINK, streamRates[0],  1),
 
-    // @Param: EXT_STAT
-    // @DisplayName: Extended status stream rate to ground station
-    // @Description: Extended status stream rate to ground station
-    // @Units: Hz
-    // @Range: 0 10
-    // @Increment: 1
-    // @User: Advanced
+
+    //////custom closed. TO ------------------------ 1
+    //// 
+    //// @Param: RAW_SENS
+    //// @DisplayName: Raw sensor stream rate
+    //// @Description: Raw sensor stream rate to ground station
+    //// @Units: Hz
+    //// @Range: 0 10
+    //// @Increment: 1
+    //// @User: Advanced
+    //AP_GROUPINFO("RAW_SENS", 0, GCS_MAVLINK, streamRates[0],  1),
+
+    //// @Param: EXT_STAT
+    //// @DisplayName: Extended status stream rate to ground station
+    //// @Description: Extended status stream rate to ground station
+    //// @Units: Hz
+    //// @Range: 0 10
+    //// @Increment: 1
+    //// @User: Advanced
+    //AP_GROUPINFO("EXT_STAT", 1, GCS_MAVLINK, streamRates[1],  1),
+
+    //// @Param: RC_CHAN
+    //// @DisplayName: RC Channel stream rate to ground station
+    //// @Description: RC Channel stream rate to ground station
+    //// @Units: Hz
+    //// @Range: 0 10
+    //// @Increment: 1
+    //// @User: Advanced
+    //AP_GROUPINFO("RC_CHAN",  2, GCS_MAVLINK, streamRates[2],  1),
+
+    //// @Param: RAW_CTRL
+    //// @DisplayName: Raw Control stream rate to ground station
+    //// @Description: Raw Control stream rate to ground station
+    //// @Units: Hz
+    //// @Range: 0 10
+    //// @Increment: 1
+    //// @User: Advanced
+    //AP_GROUPINFO("RAW_CTRL", 3, GCS_MAVLINK, streamRates[3],  1),
+
+    //// @Param: POSITION
+    //// @DisplayName: Position stream rate to ground station
+    //// @Description: Position stream rate to ground station
+    //// @Units: Hz
+    //// @Range: 0 10
+    //// @Increment: 1
+    //// @User: Advanced
+    //AP_GROUPINFO("POSITION", 4, GCS_MAVLINK, streamRates[4],  1),
+
+    //// @Param: EXTRA1
+    //// @DisplayName: Extra data type 1 stream rate to ground station
+    //// @Description: Extra data type 1 stream rate to ground station
+    //// @Units: Hz
+    //// @Range: 0 10
+    //// @Increment: 1
+    //// @User: Advanced
+    //AP_GROUPINFO("EXTRA1",   5, GCS_MAVLINK, streamRates[5],  1),
+
+    //// @Param: EXTRA2
+    //// @DisplayName: Extra data type 2 stream rate to ground station
+    //// @Description: Extra data type 2 stream rate to ground station
+    //// @Units: Hz
+    //// @Range: 0 10
+    //// @Increment: 1
+    //// @User: Advanced
+    //AP_GROUPINFO("EXTRA2",   6, GCS_MAVLINK, streamRates[6],  1),
+
+    //// @Param: EXTRA3
+    //// @DisplayName: Extra data type 3 stream rate to ground station
+    //// @Description: Extra data type 3 stream rate to ground station
+    //// @Units: Hz
+    //// @Range: 0 10
+    //// @Increment: 1
+    //// @User: Advanced
+    //AP_GROUPINFO("EXTRA3",   7, GCS_MAVLINK, streamRates[7],  1),
+
+    //// @Param: PARAMS
+    //// @DisplayName: Parameter stream rate to ground station
+    //// @Description: Parameter stream rate to ground station
+    //// @Units: Hz
+    //// @Range: 0 10
+    //// @Increment: 1
+    //// @User: Advanced
+    //AP_GROUPINFO("PARAMS",   8, GCS_MAVLINK, streamRates[8],  10),
+
+    //// @Param: ADSB
+    //// @DisplayName: ADSB stream rate to ground station
+    //// @Description: ADSB stream rate to ground station
+    //// @Units: Hz
+    //// @Range: 0 50
+    //// @Increment: 1
+    //// @User: Advanced
+    //AP_GROUPINFO("ADSB",   9, GCS_MAVLINK, streamRates[9],  5),
+
+    //----------------------------------------------------------------------------- 1
+
+    AP_GROUPINFO("RAW_SENS", 0, GCS_MAVLINK, streamRates[0],  0),
     AP_GROUPINFO("EXT_STAT", 1, GCS_MAVLINK, streamRates[1],  1),
-
-    // @Param: RC_CHAN
-    // @DisplayName: RC Channel stream rate to ground station
-    // @Description: RC Channel stream rate to ground station
-    // @Units: Hz
-    // @Range: 0 10
-    // @Increment: 1
-    // @User: Advanced
     AP_GROUPINFO("RC_CHAN",  2, GCS_MAVLINK, streamRates[2],  1),
-
-    // @Param: RAW_CTRL
-    // @DisplayName: Raw Control stream rate to ground station
-    // @Description: Raw Control stream rate to ground station
-    // @Units: Hz
-    // @Range: 0 10
-    // @Increment: 1
-    // @User: Advanced
-    AP_GROUPINFO("RAW_CTRL", 3, GCS_MAVLINK, streamRates[3],  1),
-
-    // @Param: POSITION
-    // @DisplayName: Position stream rate to ground station
-    // @Description: Position stream rate to ground station
-    // @Units: Hz
-    // @Range: 0 10
-    // @Increment: 1
-    // @User: Advanced
+    AP_GROUPINFO("RAW_CTRL", 3, GCS_MAVLINK, streamRates[3],  0),
     AP_GROUPINFO("POSITION", 4, GCS_MAVLINK, streamRates[4],  1),
-
-    // @Param: EXTRA1
-    // @DisplayName: Extra data type 1 stream rate to ground station
-    // @Description: Extra data type 1 stream rate to ground station
-    // @Units: Hz
-    // @Range: 0 10
-    // @Increment: 1
-    // @User: Advanced
-    AP_GROUPINFO("EXTRA1",   5, GCS_MAVLINK, streamRates[5],  1),
-
-    // @Param: EXTRA2
-    // @DisplayName: Extra data type 2 stream rate to ground station
-    // @Description: Extra data type 2 stream rate to ground station
-    // @Units: Hz
-    // @Range: 0 10
-    // @Increment: 1
-    // @User: Advanced
+    AP_GROUPINFO("EXTRA1",   5, GCS_MAVLINK, streamRates[5],  0),
     AP_GROUPINFO("EXTRA2",   6, GCS_MAVLINK, streamRates[6],  1),
+    AP_GROUPINFO("EXTRA3",   7, GCS_MAVLINK, streamRates[7],  0),
+    AP_GROUPINFO("PARAMS",   8, GCS_MAVLINK, streamRates[8],  1),
+    AP_GROUPINFO("ADSB",     9, GCS_MAVLINK, streamRates[9],  0),
 
-    // @Param: EXTRA3
-    // @DisplayName: Extra data type 3 stream rate to ground station
-    // @Description: Extra data type 3 stream rate to ground station
-    // @Units: Hz
-    // @Range: 0 10
-    // @Increment: 1
-    // @User: Advanced
-    AP_GROUPINFO("EXTRA3",   7, GCS_MAVLINK, streamRates[7],  1),
-
-    // @Param: PARAMS
-    // @DisplayName: Parameter stream rate to ground station
-    // @Description: Parameter stream rate to ground station
-    // @Units: Hz
-    // @Range: 0 10
-    // @Increment: 1
-    // @User: Advanced
-    AP_GROUPINFO("PARAMS",   8, GCS_MAVLINK, streamRates[8],  10),
-
-    // @Param: ADSB
-    // @DisplayName: ADSB stream rate to ground station
-    // @Description: ADSB stream rate to ground station
-    // @Units: Hz
-    // @Range: 0 50
-    // @Increment: 1
-    // @User: Advanced
-    AP_GROUPINFO("ADSB",   9, GCS_MAVLINK, streamRates[9],  5),
     AP_GROUPEND
 };
 
@@ -871,14 +889,18 @@ GCS_MAVLINK_Plane::data_stream_send(void)
 
     if (stream_trigger(STREAM_EXTRA1)) {
         send_message(MSG_ATTITUDE);
-        send_message(MSG_SIMSTATE);
-        send_message(MSG_RPM);
-        send_message(MSG_AOA_SSA);
+
+        ////custom closed.
+        ////custom closed. send_message(MSG_SIMSTATE);
+        ////custom closed. send_message(MSG_RPM);
+        ////custom closed.send_message(MSG_AOA_SSA);
 
         if (plane.control_mode != MANUAL) {
             send_message(MSG_PID_TUNING);
         }
-        send_message(MSG_LANDING);
+
+        ////custom closed.
+        ////custom closed. send_message(MSG_LANDING);
     }
 
     if (plane.gcs_out_of_time) return;
@@ -891,22 +913,22 @@ GCS_MAVLINK_Plane::data_stream_send(void)
 
     if (stream_trigger(STREAM_EXTRA3)) {
         send_message(MSG_AHRS);
-        send_message(MSG_HWSTATUS);
+        ////custom closed.send_message(MSG_HWSTATUS);
         send_message(MSG_WIND);
-        send_message(MSG_RANGEFINDER);
+        ////custom closed. send_message(MSG_RANGEFINDER);
         send_message(MSG_SYSTEM_TIME);
 #if AP_TERRAIN_AVAILABLE
         send_message(MSG_TERRAIN);
 #endif
-        send_message(MSG_MAG_CAL_REPORT);
-        send_message(MSG_MAG_CAL_PROGRESS);
+        ////custom closed. send_message(MSG_MAG_CAL_REPORT);
+        ////custom closed. send_message(MSG_MAG_CAL_PROGRESS);
         send_message(MSG_BATTERY2);
         send_message(MSG_BATTERY_STATUS);
-        send_message(MSG_MOUNT_STATUS);
-        send_message(MSG_OPTICAL_FLOW);
-        send_message(MSG_EKF_STATUS_REPORT);
-        send_message(MSG_GIMBAL_REPORT);
-        send_message(MSG_VIBRATION);
+        ////custom closed.send_message(MSG_MOUNT_STATUS);
+        ////custom closed.send_message(MSG_OPTICAL_FLOW);
+        ////custom closed.send_message(MSG_EKF_STATUS_REPORT);
+        ////custom closed.send_message(MSG_GIMBAL_REPORT);
+        ////custom closed.send_message(MSG_VIBRATION);
     }
 
     if (plane.gcs_out_of_time) return;
