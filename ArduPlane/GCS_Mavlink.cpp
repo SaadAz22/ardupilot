@@ -920,6 +920,7 @@ GCS_MAVLINK_Plane::data_stream_send(void)
 #if AP_TERRAIN_AVAILABLE
         send_message(MSG_TERRAIN);
 #endif
+        //
         ////custom closed. send_message(MSG_MAG_CAL_REPORT);
         ////custom closed. send_message(MSG_MAG_CAL_PROGRESS);
         send_message(MSG_BATTERY2);
