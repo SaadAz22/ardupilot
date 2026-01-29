@@ -99,13 +99,14 @@ void Plane::send_heartbeat(mavlink_channel_t chan)
 
 void Plane::send_attitude(mavlink_channel_t chan)
 {
-    float r = ahrs.roll;
-    float p = ahrs.pitch - radians(g.pitch_trim_cd*0.01f);
+    float r = ahrs.pitch - radians(g.pitch_trim_cd * 0.01f);  // ROLL yerine PITCH
+    float p = ahrs.roll;                                   // PITCH yerine ROLL
     float y = ahrs.yaw;
+
     
     if (quadplane.tailsitter_active()) {
-        r = quadplane.ahrs_view->roll;
-        p = quadplane.ahrs_view->pitch;
+        r = quadplane.ahrs_view->pitch;
+        p = quadplane.ahrs_view->roll;
         y = quadplane.ahrs_view->yaw;
     }
     
@@ -920,7 +921,7 @@ GCS_MAVLINK_Plane::data_stream_send(void)
 #if AP_TERRAIN_AVAILABLE
         send_message(MSG_TERRAIN);
 #endif
-        //
+        
         ////custom closed. send_message(MSG_MAG_CAL_REPORT);
         ////custom closed. send_message(MSG_MAG_CAL_PROGRESS);
         send_message(MSG_BATTERY2);
