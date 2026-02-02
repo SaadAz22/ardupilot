@@ -127,65 +127,47 @@ MAV_STATE GCS_MAVLINK_Plane::vehicle_system_status() const
 
 void GCS_MAVLINK_Plane::send_attitude() const
 {
-    const AP_AHRS &ahrs = AP::ahrs();
+    const AP_AHRS& ahrs = AP::ahrs();
 
-    float r = ahrs.get_roll();
-    float p = ahrs.get_pitch();
+    // Gerçek değerleri al
+    float true_roll = ahrs.get_roll();
+    float true_pitch = ahrs.get_pitch();
     float y = ahrs.get_yaw();
 
+    // Trim, gerçek pitch'e uygulanmalı
     if (!(plane.flight_option_enabled(FlightOptions::GCS_REMOVE_TRIM_PITCH))) {
-        p -= radians(plane.g.pitch_trim);
+        true_pitch -= radians(plane.g.pitch_trim);
     }
 
 #if HAL_QUADPLANE_ENABLED
     if (plane.quadplane.show_vtol_view()) {
-        r = plane.quadplane.ahrs_view->roll;
-        p = plane.quadplane.ahrs_view->pitch;
+        // VTOL view'dan gerçek değerleri al
+        true_roll = plane.quadplane.ahrs_view->roll;
+        true_pitch = plane.quadplane.ahrs_view->pitch;
         y = plane.quadplane.ahrs_view->yaw;
+
+        // (İstersen burada da trim uygulaması aynı mantıkla true_pitch'e kalır;
+        // yukarıda zaten uygulandı, ama VTOL view için ayrıca istiyorsan burada da ekleyebilirsin.)
     }
 #endif
 
-    const Vector3f &omega = ahrs.get_gyro();
+    // SWAP: MAVLink roll alanına gerçek pitch, MAVLink pitch alanına gerçek roll gönder
+    const float out_roll = true_pitch;
+    const float out_pitch = true_roll;
+
+    const Vector3f& omega = ahrs.get_gyro();
+    // SWAP: rollspeed <-> pitchspeed
     mavlink_msg_attitude_send(
         chan,
         millis(),
-        r,
-        p,
+        out_roll,
+        out_pitch,
         y,
-        omega.x,
-        omega.y,
+        omega.y,   // rollspeed  = gerçek pitch rate
+        omega.x,   // pitchspeed = gerçek roll rate
         omega.z);
 }
 
-void GCS_MAVLINK_Plane::send_attitude_target() 
-{
-#if HAL_QUADPLANE_ENABLED
-    // Check if the attitude target is valid for reporting
-    const uint32_t now = AP_HAL::millis();
-    if (now  - plane.quadplane.last_att_control_ms > 100) {
-        return;
-    }
-
-    const Quaternion quat  = plane.quadplane.attitude_control->get_attitude_target_quat();
-    const Vector3f& ang_vel = plane.quadplane.attitude_control->get_attitude_target_ang_vel();
-    const float throttle = plane.quadplane.attitude_control->get_throttle_in();
-
-    const float quat_out[4] {quat.q1, quat.q2, quat.q3, quat.q4};
-
-    const uint16_t typemask = 0; 
-
-    mavlink_msg_attitude_target_send(
-        chan,
-        now,                    // time since boot (ms)
-        typemask,               // Bitmask that tells the system what control dimensions should be ignored by the vehicle
-        quat_out,               // Target attitude quaternion [w, x, y, z] order, zero-rotation is [1, 0, 0, 0], unit-length
-        ang_vel.x,              // bodyframe target roll rate (rad/s)
-        ang_vel.y,              // bodyframe target pitch rate (rad/s)
-        ang_vel.z,              // bodyframe yaw rate (rad/s)
-        throttle);              // Collective thrust, normalized to 0 .. 1
-
-#endif // HAL_QUADPLANE_ENABLED 
-}
 
 void GCS_MAVLINK_Plane::send_aoa_ssa()
 {

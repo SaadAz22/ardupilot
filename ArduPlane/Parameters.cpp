@@ -1427,6 +1427,42 @@ void Plane::load_parameters(void)
 
     AP_Param::set_frame_type_flags(AP_PARAM_FRAME_PLANE);
 
+    // custom cuavv5 saad
+        // --------------------------------------------------------------------
+    // UDP/MAVLink param download stabilitesi için GÜVENLİ varsayılanlar
+    // (uçuş davranışını değiştirmez, sadece telemetri trafiğini azaltır)
+    // --------------------------------------------------------------------
+
+    // TELEM1 genelde SERIAL1'dir: MAVLink2 + uygun baud varsayılanı
+    // Not: set_default_by_name sadece "default" belirler, EEPROM'a zorla yazmaz.
+    AP_Param::set_default_by_name("SERIAL1_PROTOCOL", 2);   // MAVLink2
+    AP_Param::set_default_by_name("SERIAL1_BAUD", 115);     // 115200 (güvenli minimum)
+    // Eğer linkin güçlü ise 921 (921600) daha iyi olur:
+    // AP_Param::set_default_by_name("SERIAL1_BAUD", 921);
+
+    // SR1_ (TELEM1) stream rate'lerini düşük tut (param download tıkanmasın)
+    AP_Param::set_default_by_name("SR1_RAW_SENS", 0);
+    AP_Param::set_default_by_name("SR1_RAW_CTRL", 0);
+
+    AP_Param::set_default_by_name("SR1_EXT_STAT", 2);
+    AP_Param::set_default_by_name("SR1_POSITION", 2);
+    AP_Param::set_default_by_name("SR1_EXTRA1", 1);
+    AP_Param::set_default_by_name("SR1_EXTRA2", 1);
+    AP_Param::set_default_by_name("SR1_EXTRA3", 1);
+    AP_Param::set_default_by_name("SR1_RC_CHAN", 1);
+
+    // Param akışı: çok düşük olursa download yavaşlar, çok yüksek olursa link boğulur.
+    // 10 genelde stabil bir denge.
+    AP_Param::set_default_by_name("SR1_PARAMS", 10);
+
+    // İstersen STATUSTEXT spamını azaltmak için (bazı kurulumlarda faydalı):
+    // AP_Param::set_default_by_name("STATUSTEXT_MODE", 1);  // varsa
+
+
+    // end ; saad
+
+    
+    
     // Convert chan params to RCx_OPTION
     for (uint8_t i=0; i<ARRAY_SIZE(rc_option_conversion); i++) {
         AP_Int8 chan_param;
