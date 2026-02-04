@@ -2,6 +2,17 @@
 
 #include <AP_Gripper/AP_Gripper.h>
 
+
+// =============================== customed saad
+// Minimal parameter set switch
+// 1: keep only essential params/groups for remote link
+// 0: full ArduPlane params
+// ===============================
+#ifndef PLANE_MINIMAL_PARAMS
+#define PLANE_MINIMAL_PARAMS 1
+#endif
+// =============================== end customed saad
+
 /*
  *  ArduPlane parameter definitions
  *
@@ -766,11 +777,15 @@ const AP_Param::Info Plane::var_info[] = {
     // @Path: ../libraries/AP_GPS/AP_GPS.cpp
     GOBJECT(gps, "GPS", AP_GPS),
 
+
+#if !PLANE_MINIMAL_PARAMS // ==================================================== saad customed
 #if AP_CAMERA_ENABLED
     // @Group: CAM
     // @Path: ../libraries/AP_Camera/AP_Camera.cpp
     GOBJECT(camera, "CAM", AP_Camera),
 #endif
+#endif // ==================================================== saad customed
+
 
     // @Group: ARMING_
     // @Path: AP_Arming.cpp,../libraries/AP_Arming/AP_Arming.cpp
@@ -782,11 +797,16 @@ const AP_Param::Info Plane::var_info[] = {
     GOBJECT(relay,                  "RELAY", AP_Relay),
 #endif
 
+
+#if !PLANE_MINIMAL_PARAMS // ==================================================== saad customed
 #if HAL_PARACHUTE_ENABLED
 	// @Group: CHUTE_
     // @Path: ../libraries/AP_Parachute/AP_Parachute.cpp
     GOBJECT(parachute,		"CHUTE_", AP_Parachute),
 #endif
+
+
+
 
 #if AP_RANGEFINDER_ENABLED
     // @Group: RNGFND
@@ -800,6 +820,8 @@ const AP_Param::Info Plane::var_info[] = {
     // @User: Standard
     GSCALAR(rangefinder_landing,    "RNGFND_LANDING",   0),
 #endif
+#endif // ==================================================== saad customed
+
 
 #if AP_TERRAIN_AVAILABLE
     // @Group: TERRAIN_
@@ -807,6 +829,8 @@ const AP_Param::Info Plane::var_info[] = {
     GOBJECT(terrain,                "TERRAIN_", AP_Terrain),
 #endif
 
+
+#if !PLANE_MINIMAL_PARAMS // ==================================================== saad customed
 #if HAL_ADSB_ENABLED
     // @Group: ADSB_
     // @Path: ../libraries/AP_ADSB/AP_ADSB.cpp
@@ -816,6 +840,7 @@ const AP_Param::Info Plane::var_info[] = {
     // @Path: ../libraries/AP_Avoidance/AP_Avoidance.cpp
     GOBJECT(avoidance_adsb, "AVD_", AP_Avoidance_Plane),
 #endif
+#endif  // ==================================================== saad customed
 
 #if HAL_QUADPLANE_ENABLED
     // @Group: Q_
@@ -925,11 +950,13 @@ const AP_Param::Info Plane::var_info[] = {
     // @Path: ../libraries/AP_TECS/AP_TECS.cpp
     GOBJECT(TECS_controller,         "TECS_",   AP_TECS),
 
+#if !PLANE_MINIMAL_PARAMS // ==================================================== saad customed
 #if HAL_MOUNT_ENABLED
     // @Group: MNT
     // @Path: ../libraries/AP_Mount/AP_Mount.cpp
     GOBJECT(camera_mount,           "MNT",  AP_Mount),
 #endif
+#endif // ==================================================== saad customed
 
     // @Group: BATT
     // @Path: ../libraries/AP_BattMonitor/AP_BattMonitor.cpp
@@ -939,6 +966,7 @@ const AP_Param::Info Plane::var_info[] = {
     // @Path: ../libraries/AP_BoardConfig/AP_BoardConfig.cpp
     GOBJECT(BoardConfig,            "BRD_",       AP_BoardConfig),
 
+#if !PLANE_MINIMAL_PARAMS // ==================================================== saad customed
 #if HAL_MAX_CAN_PROTOCOL_DRIVERS
     // @Group: CAN_
     // @Path: ../libraries/AP_CANManager/AP_CANManager.cpp
@@ -951,6 +979,7 @@ const AP_Param::Info Plane::var_info[] = {
     GOBJECT(sitl, "SIM_", SITL::SIM),
 #endif
 
+
 #if AP_ADVANCEDFAILSAFE_ENABLED
     // @Group: AFS_
     // @Path: ../libraries/AP_AdvancedFailsafe/AP_AdvancedFailsafe.cpp
@@ -962,16 +991,22 @@ const AP_Param::Info Plane::var_info[] = {
     // @Path: ../libraries/AP_OpticalFlow/AP_OpticalFlow.cpp
     GOBJECT(optflow,   "FLOW", AP_OpticalFlow),
 #endif
+#endif // ==================================================== saad customed
 
     // @Group: MIS_
     // @Path: ../libraries/AP_Mission/AP_Mission.cpp
     GOBJECT(mission, "MIS_",       AP_Mission),
+
+
+#if !PLANE_MINIMAL_PARAMS // ==================================================== saad customed
 
 #if HAL_RALLY_ENABLED
     // @Group: RALLY_
     // @Path: ../libraries/AP_Rally/AP_Rally.cpp
     GOBJECT(rally,  "RALLY_",       AP_Rally),
 #endif
+#endif // ==================================================== saad customed
+
 
 #if HAL_NAVEKF2_AVAILABLE
     // @Group: EK2_
@@ -997,9 +1032,13 @@ const AP_Param::Info Plane::var_info[] = {
     GOBJECT(rssi, "RSSI_",  AP_RSSI),
 #endif
 
+
+#if !PLANE_MINIMAL_PARAMS // ==================================================== saad customed
     // @Group: NTF_
     // @Path: ../libraries/AP_Notify/AP_Notify.cpp
     GOBJECT(notify, "NTF_",  AP_Notify),
+#endif // ==================================================== saad customed
+
 
     // @Group: 
     // @Path: Parameters.cpp

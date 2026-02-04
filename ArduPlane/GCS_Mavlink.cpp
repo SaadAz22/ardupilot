@@ -597,7 +597,7 @@ const AP_Param::GroupInfo GCS_MAVLINK_Parameters::var_info[] = {
     // @Increment: 1
     // @RebootRequired: True
     // @User: Advanced
-    AP_GROUPINFO("PARAMS",   8, GCS_MAVLINK_Parameters, streamRates[8],  10),
+    AP_GROUPINFO("PARAMS",   8, GCS_MAVLINK_Parameters, streamRates[8],  5),
 
     // @Param: ADSB
     // @DisplayName: ADSB stream rate
@@ -607,7 +607,7 @@ const AP_Param::GroupInfo GCS_MAVLINK_Parameters::var_info[] = {
     // @Increment: 1
     // @RebootRequired: True
     // @User: Advanced
-    AP_GROUPINFO("ADSB",   9, GCS_MAVLINK_Parameters, streamRates[9],  5),
+    AP_GROUPINFO("ADSB",   9, GCS_MAVLINK_Parameters, streamRates[9],  0),
     AP_GROUPEND
 };
 
@@ -665,7 +665,7 @@ static const ap_message STREAM_EXTRA1_msgs[] = {
 #if AP_RPM_ENABLED
     MSG_RPM,
 #endif
-    MSG_AOA_SSA,
+ //   MSG_AOA_SSA,
     MSG_PID_TUNING,
     MSG_LANDING,
 #if HAL_WITH_ESC_TELEM
@@ -674,9 +674,9 @@ static const ap_message STREAM_EXTRA1_msgs[] = {
 #if HAL_EFI_ENABLED
     MSG_EFI_STATUS,
 #endif
-#if AP_AIRSPEED_HYGROMETER_ENABLE
-    MSG_HYGROMETER,
-#endif
+//#if AP_AIRSPEED_HYGROMETER_ENABLE
+//    MSG_HYGROMETER,
+//#endif
 };
 static const ap_message STREAM_EXTRA2_msgs[] = {
     MSG_VFR_HUD

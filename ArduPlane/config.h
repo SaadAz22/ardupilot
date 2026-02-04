@@ -206,7 +206,7 @@
 #endif
 
 #ifndef AP_PLANE_OFFBOARD_GUIDED_SLEW_ENABLED
- #define AP_PLANE_OFFBOARD_GUIDED_SLEW_ENABLED 1
+ #define AP_PLANE_OFFBOARD_GUIDED_SLEW_ENABLED 0
 #endif
 
 //////////////////////////////////////////////////////////////////////////////
