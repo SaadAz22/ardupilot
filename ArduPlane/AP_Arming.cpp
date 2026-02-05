@@ -273,6 +273,15 @@ bool AP_Arming_Plane::arm_checks(AP_Arming::Method method)
         }
     }
 
+
+    // Custom Saad - block arming unless CUSTOMENDERARMING=1
+    if (plane.customenderarming.get() == 0) {
+        check_failed(ARMING_CHECK_NONE, "CUSTOMENDERARMING=0");
+        return false;
+    }
+    // =============================== end customed saad
+    
+  
     //are arming checks disabled?
     if (checks_to_perform == 0) {
         return true;

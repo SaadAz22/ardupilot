@@ -40,6 +40,16 @@ const AP_Param::Info Plane::var_info[] = {
     // @User: Advanced
     GSCALAR(sysid_my_gcs,           "SYSID_MYGCS",    255),
 
+    // ==================================================== saad customed
+    // @Param: CUSTOMENDER
+    // @DisplayName: Custom Ender arming enable
+    // @Description: 0 disables arming entirely. Set to 1 to allow arming.
+    // @Values: 0:Disallow,1:Allow
+    // @User: Standard
+    GSCALAR(customender, "CUSTOMENDER", 0),
+    // ==================================================== end saad customed
+
+
     // AP_SerialManager was here
 
     // @Param: AUTOTUNE_LEVEL
@@ -1005,7 +1015,6 @@ const AP_Param::Info Plane::var_info[] = {
     // @Path: ../libraries/AP_Rally/AP_Rally.cpp
     GOBJECT(rally,  "RALLY_",       AP_Rally),
 #endif
-#endif // ==================================================== saad customed
 
 
 #if HAL_NAVEKF2_AVAILABLE
@@ -1013,6 +1022,8 @@ const AP_Param::Info Plane::var_info[] = {
     // @Path: ../libraries/AP_NavEKF2/AP_NavEKF2.cpp
     GOBJECTN(ahrs.EKF2, NavEKF2, "EK2_", NavEKF2),
 #endif
+#endif // ==================================================== saad customed
+
 
 #if HAL_NAVEKF3_AVAILABLE
     // @Group: EK3_
@@ -1465,6 +1476,38 @@ void Plane::load_parameters(void)
 #endif
 
     AP_Param::set_frame_type_flags(AP_PARAM_FRAME_PLANE);
+
+    // ==================================================== saad customed
+        // UDP/Ethernet üzerinden param download stabilitesi:
+    // SR1_ ve SR2_ akışlarını hafiflet, PARAMS'i yükselt.
+
+#if MAVLINK_COMM_NUM_BUFFERS >= 2
+    AP_Param::set_default_by_name("SR1_RAW_SENS", 2);
+    AP_Param::set_default_by_name("SR1_EXT_STAT", 2);
+    AP_Param::set_default_by_name("SR1_RC_CHAN", 2);
+    AP_Param::set_default_by_name("SR1_RAW_CTRL", 0);
+    AP_Param::set_default_by_name("SR1_POSITION", 2);
+    AP_Param::set_default_by_name("SR1_EXTRA1", 2);
+    AP_Param::set_default_by_name("SR1_EXTRA2", 2);
+    AP_Param::set_default_by_name("SR1_EXTRA3", 1);
+    AP_Param::set_default_by_name("SR1_PARAMS", 10);
+    AP_Param::set_default_by_name("SR1_ADSB", 0);
+#endif
+
+#if MAVLINK_COMM_NUM_BUFFERS >= 3
+    AP_Param::set_default_by_name("SR2_RAW_SENS", 2);
+    AP_Param::set_default_by_name("SR2_EXT_STAT", 2);
+    AP_Param::set_default_by_name("SR2_RC_CHAN", 2);
+    AP_Param::set_default_by_name("SR2_RAW_CTRL", 0);
+    AP_Param::set_default_by_name("SR2_POSITION", 2);
+    AP_Param::set_default_by_name("SR2_EXTRA1", 2);
+    AP_Param::set_default_by_name("SR2_EXTRA2", 2);
+    AP_Param::set_default_by_name("SR2_EXTRA3", 1);
+    AP_Param::set_default_by_name("SR2_PARAMS", 10);
+    AP_Param::set_default_by_name("SR2_ADSB", 0);
+#endif
+
+    // ==================================================== saad customed
 
     // Convert chan params to RCx_OPTION
     for (uint8_t i=0; i<ARRAY_SIZE(rc_option_conversion); i++) {

@@ -195,6 +195,11 @@ private:
     Parameters g;
     ParametersG2 g2;
 
+    // =============================== customed saad
+    // Custom Saad - arming gate
+    AP_Int8 customenderarming;
+    // =============================== end customed saad
+
     // mapping between input channels
     RCMapper rcmap;
 
